@@ -242,6 +242,45 @@
     max-width: 32ch;
   }
 
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 1.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-deep);
+    border-color: var(--gold-deep);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
   .hero-stamps {
     display: flex;
     flex-direction: column;
@@ -464,6 +503,85 @@
     line-height: 1.5;
   }
 
+  /* ===== PIPELINE 4-COL OVERRIDE ===== */
+  .pipeline.pipeline-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* ===== TRAIT LIST (Egenskaper / Investerare) ===== */
+  .trait-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .trait-list li {
+    padding: 1.6rem 1.5rem;
+    border-bottom: 1px solid var(--rule-soft);
+    border-right: 1px solid var(--rule-soft);
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 1.2rem;
+    align-items: baseline;
+  }
+
+  .trait-list li:nth-child(2n) { border-right: none; }
+  .trait-list li:nth-last-child(-n+2) { border-bottom: none; }
+  .trait-list.trait-list-2col li:last-child:nth-child(odd) { border-right: none; }
+
+  .trait-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.3rem;
+  }
+
+  .trait-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  /* ===== ARCHITECTURE FLOW ===== */
+  .arch-flow {
+    margin-top: 3rem;
+    padding: 3rem 2rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .arch-code {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    word-break: break-word;
+  }
+
+  .arch-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold-deep);
+  }
+
+  /* ===== INVESTOR CTAs ===== */
+  .investor-ctas {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   /* ===== INDUSTRIES ===== */
   .industries-grid {
     display: grid;
@@ -471,6 +589,13 @@
     gap: 0;
     border-top: 1px solid var(--rule);
   }
+
+  .industries-grid.industries-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .industries-grid.industries-6 .industry:nth-child(3) { border-right: none; }
+  .industries-grid.industries-6 .industry:nth-child(n+4) { border-bottom: none; }
 
   .industry {
     padding: 2.5rem 1.5rem;
@@ -815,11 +940,15 @@
     .overview-pillars { grid-template-columns: repeat(2, 1fr); }
     .pillar:nth-child(2) { border-right: none; }
     .pillar:nth-child(1), .pillar:nth-child(2) { border-bottom: 1px solid var(--rule-soft); }
-    .pipeline { grid-template-columns: 1fr; gap: 1rem; }
+    .pipeline, .pipeline.pipeline-4 { grid-template-columns: 1fr; gap: 1rem; }
     .pipeline-step:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -20px; transform: translateX(50%); }
     .capabilities-list { grid-template-columns: 1fr; }
-    .industries-grid { grid-template-columns: repeat(2, 1fr); }
-    .industry:nth-child(2) { border-right: none; }
+    .industries-grid, .industries-grid.industries-6 { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid .industry { border-right: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule); }
+    .industries-grid .industry:nth-child(2n) { border-right: none; }
+    .trait-list, .trait-list.trait-list-2col { grid-template-columns: 1fr; }
+    .trait-list li, .trait-list.trait-list-2col li { border-right: none; }
+    .arch-code { font-size: 0.85rem; }
     .product-row { grid-template-columns: 1fr; gap: 0.8rem; padding: 1.8rem 0; }
     .product-status { text-align: left; }
     .why-columns { grid-template-columns: 1fr; gap: 3rem; }
@@ -849,10 +978,10 @@
       <span class="brand-suffix">AB</span>
     </a>
     <div class="nav-links">
-      <a href="#overview">Översikt</a>
-      <a href="#operations">Verksamhet</a>
-      <a href="#portfolio">Portfölj</a>
-      <a href="#approach">Metodik</a>
+      <a href="#arbetsflode">Arbetsflöde</a>
+      <a href="#egenskaper">Egenskaper</a>
+      <a href="#vertikaler">Vertikaler</a>
+      <a href="#arkitektur">Arkitektur</a>
       <a href="#contact" class="nav-cta">Kontakt</a>
     </div>
   </div>
@@ -870,11 +999,16 @@
     <div class="hero-grid">
       <div>
         <h1 class="display hero-headline fade-in delay-1">
-          Strukturerad <em>automation</em> för flera branscher.
+          Automatiserad <em>datavalidering</em> för flera branscher.
         </h1>
       </div>
       <div class="hero-meta fade-in delay-2">
-        <p>Ett svenskt teknikbolag som utvecklar AI&#8209;drivna webbtjänster för datavalidering, korrigering och strukturerad export &mdash; utan integrationer i kundens befintliga system.</p>
+        <p>En motor för validering, korrigering och export av strukturerad data. Fungerar för musik, vård, ekonomi, logistik och andra vertikaler.</p>
+
+        <div class="hero-ctas">
+          <a href="#arkitektur" class="btn btn-primary">Starta motor</a>
+          <a href="#arkitektur" class="btn btn-ghost">API&#8209;dokumentation</a>
+        </div>
 
         <div class="hero-stamps">
           <div class="stamp-row"><span>Bolagsform</span><span>Aktiebolag</span></div>
@@ -887,348 +1021,149 @@
   </div>
 </header>
 
-<!-- ============ OVERVIEW ============ -->
-<section class="section" id="overview">
+<!-- ============ ARBETSFLÖDE ============ -->
+<section class="core-model" id="arbetsflode">
   <div class="container">
     <div class="section-header">
       <div class="section-num">I.</div>
       <div class="section-meta">
-        <span class="eyebrow">Översikt &mdash; Bolagsidé</span>
-        <h2 class="display section-title">AI&#8209;drivna webbtjänster för <em>datavalidering</em> och korrigering.</h2>
-        <p class="section-lede">Perfect Hold AB utvecklar och driver återanvändbara motorer som automatiserar manuella arbetsflöden i flera branscher &mdash; med fokus på kvalitet, struktur och förutsägbarhet.</p>
+        <span class="eyebrow">Arbetsflöde &mdash; Pipeline</span>
+        <h2 class="display section-title">Fyra steg <em>från fil till export.</em></h2>
+        <p class="section-lede">Ett linjärt flöde där varje steg är enkelt att förstå, mäta och underhålla. Inga integrationer, inga sidoflöden &mdash; bara strukturerad data in och ut.</p>
       </div>
     </div>
 
-    <div class="overview-pillars">
-      <div class="pillar">
-        <div class="pillar-num">01 / 04</div>
-        <div class="pillar-title">AI&#8209;stöd vid beslut och korrigering</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">02 / 04</div>
-        <div class="pillar-title">Automatiserade arbetsflöden</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">03 / 04</div>
-        <div class="pillar-title">Filbaserade pipelines</div>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">04 / 04</div>
-        <div class="pillar-title">Multi&#8209;vertical arkitektur</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CORE MODEL ============ -->
-<section class="core-model" id="operations">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-num">II.</div>
-      <div class="section-meta">
-        <span class="eyebrow">Verksamhet &mdash; Kärnmodell</span>
-        <h2 class="display section-title">Vi bygger <em>återanvändbara motorer</em> &mdash; en grundlogik, flera vertikaler.</h2>
-        <p class="section-lede">Samma linjära flöde &mdash; validate, worksheet, correct, export &mdash; används i alla våra produkter. Det gör lösningarna förutsägbara, skalbara och enkla att införa.</p>
-      </div>
-    </div>
-
-    <div class="pipeline">
+    <div class="pipeline pipeline-4">
       <div class="pipeline-step">
         <div class="step-glyph">i</div>
         <div class="step-name">Upload</div>
-        <div class="step-desc">Fil in &mdash; strukturerad eller ostrukturerad</div>
+        <div class="step-desc">CSV/XLSX tas emot.</div>
       </div>
       <div class="pipeline-step">
         <div class="step-glyph">ii</div>
         <div class="step-name">Validate</div>
-        <div class="step-desc">Regelbaserad validering av format och konsistens</div>
+        <div class="step-desc">Regelbaserad kontroll enligt schema och domänregler.</div>
       </div>
       <div class="pipeline-step">
         <div class="step-glyph">iii</div>
         <div class="step-name">Worksheet</div>
-        <div class="step-desc">Filbaserat arbetsblad för manuell korrigering</div>
+        <div class="step-desc">Lista med avvikelser och tom korrigeringskolumn.</div>
       </div>
       <div class="pipeline-step">
         <div class="step-glyph">iv</div>
-        <div class="step-name">Correct</div>
-        <div class="step-desc">AI&#8209;stöd vid beslut och föreslagna åtgärder</div>
-      </div>
-      <div class="pipeline-step">
-        <div class="step-glyph">v</div>
         <div class="step-name">Export</div>
-        <div class="step-desc">Standardiserade format &mdash; CWR, CSV, Excel</div>
+        <div class="step-desc">Korrigerad fil i CSV, XLSX eller DDEX.</div>
       </div>
-    </div>
-
-    <div class="capabilities-list">
-      <div class="cap"><span class="cap-num">i.</span><span class="cap-text">Validerar inkommande data efter regler, format och konsistens.</span></div>
-      <div class="cap"><span class="cap-num">ii.</span><span class="cap-text">Genererar arbetsblad för korrigering &mdash; filbaserat och strukturerat.</span></div>
-      <div class="cap"><span class="cap-num">iii.</span><span class="cap-text">Tillämpar korrigeringar med kombination av manuell input och AI&#8209;förslag.</span></div>
-      <div class="cap"><span class="cap-num">iv.</span><span class="cap-text">Exporterar till standardiserade format &mdash; redo för system och rapportering.</span></div>
     </div>
   </div>
 </section>
 
-<!-- ============ INDUSTRIES ============ -->
-<section class="section">
+<!-- ============ EGENSKAPER ============ -->
+<section class="section" id="egenskaper">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">II.</div>
+      <div class="section-meta">
+        <span class="eyebrow">Egenskaper &mdash; Designval</span>
+        <h2 class="display section-title">En motor. <em>Få rörliga delar.</em></h2>
+        <p class="section-lede">Vi har medvetet hållit arkitekturen tunn för att maximera driftstabilitet och minimera komplexiteten i införandet.</p>
+      </div>
+    </div>
+
+    <ul class="trait-list">
+      <li><span class="trait-num">i.</span><span class="trait-text">En motor, flera vertikaler</span></li>
+      <li><span class="trait-num">ii.</span><span class="trait-text">Ingen databas</span></li>
+      <li><span class="trait-num">iii.</span><span class="trait-text">Ingen inloggning</span></li>
+      <li><span class="trait-num">iv.</span><span class="trait-text">Filbaserat flöde</span></li>
+      <li><span class="trait-num">v.</span><span class="trait-text">Schema&#8209;styrt</span></li>
+      <li><span class="trait-num">vi.</span><span class="trait-text">Låg komplexitet</span></li>
+      <li><span class="trait-num">vii.</span><span class="trait-text">Stabil drift</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ VERTIKALER ============ -->
+<section class="section" id="vertikaler">
   <div class="container">
     <div class="section-header">
       <div class="section-num">III.</div>
       <div class="section-meta">
-        <span class="eyebrow">Branscher &mdash; Fokusområden</span>
-        <h2 class="display section-title">Fem vertikaler. <em>En motor.</em></h2>
-        <p class="section-lede">Samma kärnteknik anpassas bransch för bransch. Vi väljer områden där manuella arbetsflöden är kostsamma och datakvalitet är affärskritiskt.</p>
+        <span class="eyebrow">Vertikaler &mdash; Användningsområden</span>
+        <h2 class="display section-title">Sex vertikaler. <em>En motor.</em></h2>
+        <p class="section-lede">Samma kärnteknik anpassas bransch för bransch &mdash; med schema och domänregler i stället för ny kod.</p>
       </div>
     </div>
 
-    <div class="industries-grid">
+    <div class="industries-grid industries-6">
       <div class="industry">
         <div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-        <div class="industry-name">Musik</div>
-        <div class="industry-desc">Metadata, kataloger, royalties</div>
+        <div class="industry-name">Musikmetadata</div>
       </div>
       <div class="industry">
         <div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.5 3-6.5C22 4 19 1 16 1c-1.5 0-3 .5-4 1.5C11 1.5 9.5 1 8 1 5 1 2 4 2 7.5c0 3 1.5 5 3 6.5l7 7z"/></svg></div>
-        <div class="industry-name">Medicin</div>
-        <div class="industry-desc">Claims, fakturor, administration</div>
+        <div class="industry-name">Vårdadministration</div>
       </div>
       <div class="industry">
-        <div class="industry-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-        <div class="industry-name">Ekonomi</div>
-        <div class="industry-desc">Fakturor, transaktioner, avstämningar</div>
+        <div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="industry-name">Fakturor</div>
       </div>
       <div class="industry">
         <div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <div class="industry-name">HR &amp; Lön</div>
-        <div class="industry-desc">Lönefiler och personaldata</div>
+        <div class="industry-name">Lönefiler</div>
       </div>
       <div class="industry">
-        <div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <div class="industry-name">Fastighet</div>
-        <div class="industry-desc">Kontrakt, hyreslistor, logistik</div>
+        <div class="industry-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div class="industry-name">Kontrakt</div>
+      </div>
+      <div class="industry">
+        <div class="industry-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="industry-name">Logistikdata</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ PRODUCTS ============ -->
-<section class="section" id="portfolio">
+<!-- ============ ARKITEKTUR ============ -->
+<section class="workflow-section" id="arkitektur">
   <div class="container">
     <div class="section-header">
       <div class="section-num">IV.</div>
       <div class="section-meta">
-        <span class="eyebrow">Portfölj &mdash; Produkter</span>
-        <h2 class="display section-title">Aktiva och <em>kommande</em> tjänster.</h2>
-        <p class="section-lede">Varje produkt är en specialisering av samma underliggande motor &mdash; byggd för en specifik bransch, ett specifikt arbetsflöde.</p>
+        <span class="eyebrow">Arkitektur &mdash; Endpoints</span>
+        <h2 class="display section-title">Fem HTTP&#8209;endpoints. <em>Inget mer.</em></h2>
+        <p class="section-lede">Hela motorn exponeras som en handfull HTTP&#8209;anrop. Inga klientbibliotek, ingen särskild SDK &mdash; bara en pipeline som svarar med strukturerade filer.</p>
       </div>
     </div>
 
-    <div class="products-table">
-      <div class="products-header">
-        <div class="mono">— I drift</div>
-        <div class="products-header-title">Aktiva tjänster</div>
-        <div class="mono" style="text-align:right;">Live · 2026</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">i.</div>
-        <div class="product-name">Kataloghub</div>
-        <div class="product-desc">Validering av musikmetadata mot branschstandard &mdash; identifierar fel, dubbletter och inkonsistenser i kataloger.</div>
-        <div class="product-status status-active">Aktiv</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">ii.</div>
-        <div class="product-name">HeyRoya</div>
-        <div class="product-desc">Korrigering av musikmetadata och CWR&#8209;redo export &mdash; från råfil till leveransklart format.</div>
-        <div class="product-status status-active">Aktiv</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">iii.</div>
-        <div class="product-name">TrapRoyaltiesPro</div>
-        <div class="product-desc">Analys av royaltyflöden och katalogprestanda &mdash; insikter över utbetalningar och rättigheter.</div>
-        <div class="product-status status-active">Aktiv</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">iv.</div>
-        <div class="product-name">Medical Billing&#8209;motor</div>
-        <div class="product-desc">Validering av medicinska claims och fakturor &mdash; regelbaserad kontroll med AI&#8209;assisterad rättning.</div>
-        <div class="product-status status-active">Aktiv</div>
-      </div>
-
-      <div class="products-header" style="margin-top: 3rem;">
-        <div class="mono">— I utveckling</div>
-        <div class="products-header-title">Kommande tjänster</div>
-        <div class="mono" style="text-align:right;">Pipeline · 2026—27</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">v.</div>
-        <div class="product-name">Invoice Validator</div>
-        <div class="product-desc">Automatiserad fakturavalidering över leverantörer, format och regelverk.</div>
-        <div class="product-status status-upcoming">Kommande</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">vi.</div>
-        <div class="product-name">Payroll Validator</div>
-        <div class="product-desc">Kontroll av lönefiler och schemaunderlag &mdash; från löneberäkning till rapportering.</div>
-        <div class="product-status status-upcoming">Kommande</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">vii.</div>
-        <div class="product-name">Contract Checker</div>
-        <div class="product-desc">Strukturerad avtalsgranskning &mdash; extrahera, jämför och flagga avvikelser.</div>
-        <div class="product-status status-upcoming">Kommande</div>
-      </div>
-
-      <div class="product-row">
-        <div class="product-index">viii.</div>
-        <div class="product-name">Data Health Engine</div>
-        <div class="product-desc">Generisk motor för datakvalitet &mdash; den underliggande plattformen blir tillgänglig som tjänst.</div>
-        <div class="product-status status-upcoming">Kommande</div>
-      </div>
+    <div class="arch-flow">
+      <code class="arch-code">upload &rarr; validate &rarr; worksheet &rarr; correct &rarr; export</code>
+      <p class="arch-note">Fem HTTP&#8209;endpoints.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ WORKFLOW DIAGRAM ============ -->
-<section class="workflow-section" id="approach">
+<!-- ============ INVESTERARE ============ -->
+<section class="section" id="investerare">
   <div class="container">
     <div class="section-header">
       <div class="section-num">V.</div>
       <div class="section-meta">
-        <span class="eyebrow">Metodik &mdash; Arbetsflöde</span>
-        <h2 class="display section-title">Ett <em>linjärt flöde</em> &mdash; från fil till leveransklar export.</h2>
-        <p class="section-lede">Inga integrationer. Inga förändringar i kundens befintliga system. Vi möter datan där den lever &mdash; i filer &mdash; och returnerar den strukturerad, korrekt och redo för nästa steg.</p>
+        <span class="eyebrow">Investerare &mdash; Underlag</span>
+        <h2 class="display section-title">Underlag för <em>investerare.</em></h2>
+        <p class="section-lede">En affärsmodell som är byggd på återanvändning &mdash; teknisk såväl som kommersiell.</p>
       </div>
     </div>
 
-    <!-- Editorial diagram -->
-    <svg viewBox="0 0 1180 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; margin-top: 2rem;">
-      <defs>
-        <pattern id="diagDots" width="6" height="6" patternUnits="userSpaceOnUse">
-          <circle cx="1" cy="1" r="0.6" fill="#c9bea0"/>
-        </pattern>
-      </defs>
+    <ul class="trait-list trait-list-2col">
+      <li><span class="trait-num">i.</span><span class="trait-text">Skalbar modell</span></li>
+      <li><span class="trait-num">ii.</span><span class="trait-text">Flera vertikaler</span></li>
+      <li><span class="trait-num">iii.</span><span class="trait-text">Låg marginalkostnad</span></li>
+      <li><span class="trait-num">iv.</span><span class="trait-text">Återanvändbar logik</span></li>
+    </ul>
 
-      <!-- Top rule with caption -->
-      <line x1="0" y1="20" x2="1180" y2="20" stroke="#c9bea0" stroke-width="1"/>
-      <text x="0" y="14" font-family="JetBrains Mono, monospace" font-size="9" fill="#76592a" letter-spacing="2">— PIPELINE / LINEAR FLOW</text>
-      <text x="1180" y="14" font-family="JetBrains Mono, monospace" font-size="9" fill="#76592a" letter-spacing="2" text-anchor="end">FIG. 01 —</text>
-
-      <!-- Pipeline boxes -->
-      <g font-family="Cormorant Garamond, serif">
-        <!-- Step 1 -->
-        <rect x="20" y="80" width="200" height="120" fill="none" stroke="#1a1f2e" stroke-width="1"/>
-        <rect x="28" y="88" width="184" height="104" fill="none" stroke="#9a7b3f" stroke-width="0.6"/>
-        <text x="40" y="108" font-family="JetBrains Mono, monospace" font-size="8" fill="#76592a" letter-spacing="2">STEG I</text>
-        <text x="40" y="140" font-size="22" font-style="italic" fill="#1a1f2e">Upload</text>
-        <text x="40" y="165" font-family="Inter, sans-serif" font-size="11" fill="#4a5266">Fil in</text>
-        <text x="40" y="180" font-family="Inter, sans-serif" font-size="11" fill="#4a5266">strukturerad / rå</text>
-
-        <!-- arrow -->
-        <line x1="225" y1="140" x2="265" y2="140" stroke="#9a7b3f" stroke-width="1"/>
-        <polygon points="265,140 258,136 258,144" fill="#9a7b3f"/>
-
-        <!-- Step 2 -->
-        <rect x="270" y="80" width="200" height="120" fill="none" stroke="#1a1f2e" stroke-width="1"/>
-        <rect x="278" y="88" width="184" height="104" fill="none" stroke="#9a7b3f" stroke-width="0.6"/>
-        <text x="290" y="108" font-family="JetBrains Mono, monospace" font-size="8" fill="#76592a" letter-spacing="2">STEG II</text>
-        <text x="290" y="140" font-size="22" font-style="italic" fill="#1a1f2e">Validate</text>
-        <text x="290" y="165" font-family="Inter, sans-serif" font-size="11" fill="#4a5266">Regelbaserad</text>
-        <text x="290" y="180" font-family="Inter, sans-serif" font-size="11" fill="#4a5266">validering</text>
-
-        <line x1="475" y1="140" x2="515" y2="140" stroke="#9a7b3f" stroke-width="1"/>
-        <polygon points="515,140 508,136 508,144" fill="#9a7b3f"/>
-
-        <!-- Step 3 -->
-        <rect x="520" y="80" width="200" height="120" fill="none" stroke="#1a1f2e" stroke-width="1"/>
-        <rect x="528" y="88" width="184" height="104" fill="none" stroke="#9a7b3f" stroke-width="0.6"/>
-        <text x="540" y="108" font-family="JetBrains Mono, monospace" font-size="8" fill="#76592a" letter-spacing="2">STEG III</text>
-        <text x="540" y="140" font-size="22" font-style="italic" fill="#1a1f2e">Worksheet</text>
-        <text x="540" y="165" font-family="Inter, sans-serif" font-size="11" fill="#4a5266">Arbetsblad för</text>
-        <text x="540" y="180" font-family="Inter, sans-serif" font-size="11" fill="#4a5266">korrigering</text>
-
-        <line x1="725" y1="140" x2="765" y2="140" stroke="#9a7b3f" stroke-width="1"/>
-        <polygon points="765,140 758,136 758,144" fill="#9a7b3f"/>
-
-        <!-- Step 4 - highlighted (AI) -->
-        <rect x="770" y="80" width="200" height="120" fill="#1a1f2e"/>
-        <rect x="778" y="88" width="184" height="104" fill="none" stroke="#9a7b3f" stroke-width="0.6"/>
-        <text x="790" y="108" font-family="JetBrains Mono, monospace" font-size="8" fill="#9a7b3f" letter-spacing="2">STEG IV · AI</text>
-        <text x="790" y="140" font-size="22" font-style="italic" fill="#f4f0e6">Correct</text>
-        <text x="790" y="165" font-family="Inter, sans-serif" font-size="11" fill="#c9bea0">AI&#8209;stöd vid</text>
-        <text x="790" y="180" font-family="Inter, sans-serif" font-size="11" fill="#c9bea0">beslut</text>
-
-        <line x1="975" y1="140" x2="1015" y2="140" stroke="#9a7b3f" stroke-width="1"/>
-        <polygon points="1015,140 1008,136 1008,144" fill="#9a7b3f"/>
-
-        <!-- Step 5 -->
-        <rect x="1020" y="80" width="140" height="120" fill="none" stroke="#1a1f2e" stroke-width="1"/>
-        <rect x="1028" y="88" width="124" height="104" fill="none" stroke="#9a7b3f" stroke-width="0.6"/>
-        <text x="1040" y="108" font-family="JetBrains Mono, monospace" font-size="8" fill="#76592a" letter-spacing="2">STEG V</text>
-        <text x="1040" y="140" font-size="22" font-style="italic" fill="#1a1f2e">Export</text>
-        <text x="1040" y="165" font-family="Inter, sans-serif" font-size="10" fill="#4a5266">CWR · CSV</text>
-        <text x="1040" y="180" font-family="Inter, sans-serif" font-size="10" fill="#4a5266">Excel</text>
-      </g>
-
-      <!-- Bottom rule -->
-      <line x1="0" y1="245" x2="1180" y2="245" stroke="#c9bea0" stroke-width="1"/>
-      <text x="0" y="265" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#4a5266">Samma flöde &mdash; oavsett bransch, oavsett produkt.</text>
-      <text x="1180" y="265" font-family="JetBrains Mono, monospace" font-size="9" fill="#76592a" letter-spacing="2" text-anchor="end">PERFECT HOLD AB · 2026</text>
-    </svg>
-  </div>
-</section>
-
-<!-- ============ TAGS BAR ============ -->
-<div class="container">
-  <div class="tags-bar">
-    <span class="tag">Tech</span>
-    <span class="tag tag-dot">&middot;</span>
-    <span class="tag">B2B</span>
-    <span class="tag tag-dot">&middot;</span>
-    <span class="tag">SaaS</span>
-    <span class="tag tag-dot">&middot;</span>
-    <span class="tag">Data&nbsp;Quality</span>
-  </div>
-</div>
-
-<!-- ============ WHY ============ -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-num">VI.</div>
-      <div class="section-meta">
-        <span class="eyebrow">Differentiering &mdash; Varför Perfect Hold</span>
-        <h2 class="display section-title">En affärsmodell <em>byggd på återanvändning.</em></h2>
-        <p class="section-lede">Vi kombinerar disciplinen hos ett industriellt bolag med skalfördelarna hos en mjukvaruplattform. Det är inte ett experiment &mdash; det är en strukturerad expansionsmodell.</p>
-      </div>
-    </div>
-
-    <div class="why-columns">
-      <div class="why-col">
-        <h3 class="why-col-title">Affärsmodell</h3>
-        <ul class="why-list">
-          <li><div><strong>Återkommande intäkter</strong><span>SaaS-prenumeration kombinerat med per&#8209;ärende&#8209;debitering.</span></div></li>
-          <li><div><strong>Återanvändbar teknik</strong><span>En motor &mdash; flera vertikaler. Marginalkostnaden för nya marknader är låg.</span></div></li>
-          <li><div><strong>Filbaserad leverans</strong><span>Ingen integration krävs. Implementation mätt i dagar, inte kvartal.</span></div></li>
-          <li><div><strong>Fokus på datakvalitet</strong><span>Minskar fel och manuellt arbete &mdash; direkt mätbar avkastning.</span></div></li>
-        </ul>
-      </div>
-
-      <div class="why-col">
-        <h3 class="why-col-title">Positionering</h3>
-        <ul class="why-list">
-          <li><div><strong>Tydlig nisch</strong><span>Tech&#8209;bolag specialiserat på datavalidering och korrigering.</span></div></li>
-          <li><div><strong>Verkliga arbetsflöden</strong><span>Bygger på faktiska behov i kundens befintliga processer &mdash; inte teoretiska scenarier.</span></div></li>
-          <li><div><strong>Bransch för bransch</strong><span>Skalar utan att byta kärnteknik &mdash; vertikalexpansion utan ombyggnad.</span></div></li>
-          <li><div><strong>Svensk hemvist</strong><span>Aktiebolag med fokus på långsiktig och strukturerad tillväxt.</span></div></li>
-        </ul>
-      </div>
+    <div class="investor-ctas">
+      <a href="mailto:info@perfecthold.online?subject=Investor-material" class="btn btn-primary">Investor&#8209;material</a>
+      <a href="#contact" class="btn btn-ghost">Kontakt</a>
     </div>
   </div>
 </section>
@@ -1237,7 +1172,7 @@
 <section class="contact-section" id="contact">
   <div class="container">
     <div class="section-header">
-      <div class="section-num">VII.</div>
+      <div class="section-num">VI.</div>
       <div class="section-meta">
         <span class="eyebrow">Kontakt &mdash; Bolagsdata</span>
         <h2 class="display section-title">För dialog kring samarbeten, <em>investeringar</em> eller pilotprojekt.</h2>
